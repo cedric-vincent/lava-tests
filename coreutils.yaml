@@ -19,3 +19,9 @@ run:
     - FORCE_UNSAFE_CONFIGURE=1 ./configure
     - make
     - make check
+parse:
+  pattern: "^(?P<result>(PASS|SKIP|FAIL)): (?P<test_case_id>[\\w/.-]+)"
+  fixupdict:
+    PASS: pass
+    SKIP: skip
+    FAIL: fail
