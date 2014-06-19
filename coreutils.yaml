@@ -1,0 +1,21 @@
+metadata:
+  name: coreutils-build-check
+  format: "Lava-Test-Shell Test Definition 1.0"
+  description: "Build and check coreutils"
+os:
+  - ubuntu
+  - debian
+devices:
+  - kvm
+install:
+  deps:
+    - build-essential
+    - wget
+run:
+  steps:
+    - wget http://ftp.gnu.org/gnu/coreutils/coreutils-8.22.tar.xz
+    - tar xf coreutils-8.22.tar.xz
+    - cd coreutils-8.22
+    - FORCE_UNSAFE_CONFIGURE=1 ./configure
+    - make
+    - make check
