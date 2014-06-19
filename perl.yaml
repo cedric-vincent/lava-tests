@@ -1,0 +1,27 @@
+metadata:
+  name: perl-build-check
+  format: "Lava-Test-Shell Test Definition 1.0"
+  description: "Build and check perl 5"
+os:
+  - ubuntu
+  - debian
+devices:
+  - kvm
+install:
+  deps:
+    - build-essential
+    - wget
+run:
+  steps:
+    - wget http://www.cpan.org/src/5.0/perl-5.20.0.tar.gz
+    - tar xf perl-5.20.0.tar.gz
+    - cd perl-5.20.0
+    - ./Configure -de
+    - make
+    - make check
+parse:
+  pattern: "^ *(?P<test_case_id>[^ ]+) [^ ]+ (?P<result>(ok|skipped|not ok))"
+  fixupdict:
+    ok: pass
+    skipped: skip
+    "not ok": fail
