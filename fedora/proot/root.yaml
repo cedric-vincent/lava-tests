@@ -1,0 +1,31 @@
+metadata:
+  name: proot-make-check-root
+  format: "Lava-Test-Shell Test Definition 1.0"
+  description: "Build and run PRoot test suite as Root"
+  os:
+    - fedora
+  devices:
+    - kvm
+
+install:
+  git-repos:
+    - https://github.com/cedric-vincent/PRoot
+  deps:
+    - gcc
+    - automake
+    - libtalloc-devel
+    - glibc-static
+    - gdb
+    - valgrind
+    - strace
+
+run:
+  steps:
+    - ./scripts/proot/make-check.sh
+
+parse:
+  pattern: "^\\s*CHECK\\s+test-(?P<test_case_id>\\w+)\\s+(?P<result>(ok|skipped|FAILED))"
+  fixupdict:
+    ok: pass
+    skipped: skip
+    FAILED: fail
