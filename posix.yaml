@@ -1,0 +1,28 @@
+metadata:
+  name: posix-test-suite
+  format: "Lava-Test-Shell Test Definition 1.0"
+  description: "Posix test suite"
+os:
+  - ubuntu
+  - debian
+devices:
+  - kvm
+install:
+  deps:
+    - build-essential
+    - wget
+run:
+  steps:
+    - wget http://garr.dl.sourceforge.net/project/posixtest/posixtest/posixtestsuite-1.5.2/posixtestsuite-1.5.2.tar.gz
+    - tar xf posixtestsuite-1.5.2.tar.gz
+    - cd posixtestsuite
+    - make
+parse:
+  pattern: "^(?P<test_case_id>[^:]+): execution: (?P<result>(PASS|FAILED|UNSUPPORTED|UNTESTED|UNRESOLVED|INTERRUPTED))"
+  fixupdict:
+    PASS: pass
+    FAILED: fail
+    UNSUPPORTED: skip
+    UNTESTED: skip
+    UNRESOLVED: skip
+    INTERRUPTED: skip
