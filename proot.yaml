@@ -12,6 +12,10 @@ install:
   deps:
     - build-essential
     - libtalloc-dev
+    - gettext
+    - libcap2-bin
+    - realpath
+    - strace
     - valgrind
 run:
   steps:
