@@ -2,10 +2,10 @@ metadata:
   name: proot-build-and-check
   format: "Lava-Test-Shell Test Definition 1.0"
   description: "Build and run PRoot test suite"
-os:
-  - ubuntu
-devices:
-  - kvm
+  os:
+    - ubuntu
+  devices:
+    - kvm
 install:
   git-repos:
     - https://github.com/cedric-vincent/PRoot

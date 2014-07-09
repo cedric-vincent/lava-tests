@@ -2,11 +2,11 @@ metadata:
   name: posix-test-suite
   format: "Lava-Test-Shell Test Definition 1.0"
   description: "Posix test suite"
-os:
-  - ubuntu
-  - debian
-devices:
-  - kvm
+  os:
+    - ubuntu
+    - debian
+  devices:
+    - kvm
 install:
   deps:
     - build-essential
