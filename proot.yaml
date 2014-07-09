@@ -12,6 +12,7 @@ install:
   deps:
     - build-essential
     - libtalloc-dev
+    - valgrind
 run:
   steps:
     - cd PRoot
