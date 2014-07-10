@@ -1,7 +1,7 @@
 metadata:
-  name: proot-make-check-root
+  name: proot-make-check-user
   format: "Lava-Test-Shell Test Definition 1.0"
-  description: "Build and run PRoot test suite as Root"
+  description: "Build and run PRoot test suite as simple user"
   os:
     - debian
     - ubuntu
@@ -22,7 +22,9 @@ install:
 
 run:
   steps:
-    - ./proot/make-check.sh
+    - useradd lavatest
+    - chown -R lavatest PRoot
+    - su lavatest -c ./scripts/proot/make-check.sh
 
 parse:
   pattern: "^\\s*CHECK\\s+test-(?P<test_case_id>\\w+)\\s+(?P<result>(ok|skipped|FAILED))"
