@@ -1,11 +1,13 @@
 metadata:
-  name: proot-build-and-check
+  name: proot-make-check-root
   format: "Lava-Test-Shell Test Definition 1.0"
-  description: "Build and run PRoot test suite"
+  description: "Build and run PRoot test suite as Root"
   os:
+    - debian
     - ubuntu
   devices:
     - kvm
+
 install:
   git-repos:
     - https://github.com/cedric-vincent/PRoot
@@ -17,12 +19,11 @@ install:
     - realpath
     - strace
     - valgrind
+
 run:
   steps:
-    - cd PRoot
-    - make -C src
-    - make -C tests V=1
-    - cd ..
+    - ./proot/make-check.sh
+
 parse:
   pattern: "^\\s*CHECK\\s+test-(?P<test_case_id>\\w+)\\s+(?P<result>(ok|skipped|FAILED))"
   fixupdict:
