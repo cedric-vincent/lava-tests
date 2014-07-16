@@ -1,0 +1,34 @@
+metadata:
+  name: stlinux-install
+  format: "Lava-Test-Shell Test Definition 1.0"
+  description: "Install STLinux"
+  os:
+    - debian
+    - ubuntu
+  devices:
+    - kvm
+
+install:
+  deps:
+    - rpm
+    - lib32z1
+    - lib32ncurses5
+    - lib32bz2-1.0
+    - python-urlgrabber
+    - python-rpm
+    - python-sqlitecachec
+
+run:
+  steps:
+    - export PATH=$PATH:/opt/STM/STLinux-2.4/host/bin/:/opt/STM/STLinux-2.4/devkit/armv7/bin
+    - wget http://ftp.stlinux.com/pub/stlinux/2.4/misc/stlinux24-host-STLinux_deps-20140120-1.i386.rpm
+    - rpm -ivh stlinux24-host-STLinux_deps-20140120-1.i386.rpm
+    - wget http://ftp.stlinux.com/pub/stlinux/2.4/install
+    - sed -i s=#\!/bin/sh=#\!/bin/bash= install
+    - chmod +x install
+    - ./install --debian || true
+    - $(which stmyum) -y install stlinux24-cross-armv7-armdebug
+    - $(which stmyum) -y install stlinux24-host-stmc
+    - $(which stmyum) -y install stlinux24-cross-armv7-binutils
+    - $(which stmyum) -y install stlinux24-host-dtc
+    - $(which stmyum) -y update
