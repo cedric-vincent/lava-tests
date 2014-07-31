@@ -20,15 +20,14 @@ install:
 
 run:
   steps:
-    - lava-test-case export --shell export PATH=$PATH:/opt/STM/STLinux-2.4/host/bin/:/opt/STM/STLinux-2.4/devkit/armv7/bin
     - lava-test-case wget_host_deps --shell wget http://ftp.stlinux.com/pub/stlinux/2.4/misc/stlinux24-host-STLinux_deps-20140120-1.i386.rpm
     - lava-test-case rpm_host_deps --shell rpm -ivh stlinux24-host-STLinux_deps-20140120-1.i386.rpm
     - lava-test-case wget_install --shell wget http://ftp.stlinux.com/pub/stlinux/2.4/install
     - lava-test-case sed_install --shell sed -i s=#\!/bin/sh=#\!/bin/bash= install
     - lava-test-case chmod_install --shell chmod +x install
     - lava-test-case install --shell ./install --debian || true
-    - lava-test-case stmyum_ardebug --shell $(which stmyum) -y install stlinux24-cross-armv7-armdebug
-    - lava-test-case stmyum_stmc --shell $(which stmyum) -y install stlinux24-host-stmc
-    - lava-test-case stmyum_binutils --shell $(which stmyum) -y install stlinux24-cross-armv7-binutils
-    - lava-test-case stmyum_dtc --shell $(which stmyum) -y install stlinux24-host-dtc
-    - lava-test-case stmyum_update --shell $(which stmyum) -y update
+    - lava-test-case stmyum_armdebug --shell /opt/STM/STLinux-2.4/host/bin/stmyum -y install stlinux24-cross-armv7-armdebug
+    - lava-test-case stmyum_stmc --shell /opt/STM/STLinux-2.4/host/bin/stmyum -y install stlinux24-host-stmc
+    - lava-test-case stmyum_binutils --shell /opt/STM/STLinux-2.4/host/bin/stmyum -y install stlinux24-cross-armv7-binutils
+    - lava-test-case stmyum_dtc --shell /opt/STM/STLinux-2.4/host/bin/stmyum -y install stlinux24-host-dtc
+    - lava-test-case stmyum_update --shell /opt/STM/STLinux-2.4/host/bin/stmyum -y update
