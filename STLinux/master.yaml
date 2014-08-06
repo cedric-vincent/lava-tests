@@ -1,0 +1,17 @@
+metadata:
+  name: master-boot-ST-board
+  format: "Lava-Test-Shell Test Definition 1.0"
+  description: "Setup and boot an ST board"
+  os:
+    - debian
+    - ubuntu
+  devices:
+    - kvm
+
+install:
+  deps:
+    - python-pexpect
+
+run:
+  steps:
+    - ./STLinux/master.sh
