@@ -1,0 +1,33 @@
+metadata:
+  name: stlinux-install
+  format: "Lava-Test-Shell Test Definition 1.0"
+  description: "Install STLinux"
+  os:
+    - debian
+    - ubuntu
+  devices:
+    - kvm
+
+install:
+  deps:
+    - rpm
+    - lib32z1
+    - lib32ncurses5
+    - lib32bz2-1.0
+    - python-urlgrabber
+    - python-rpm
+    - python-sqlitecachec
+
+run:
+  steps:
+    - lava-test-case wget_host_deps --shell wget http://ftp.stlinux.com/pub/stlinux/2.4/misc/stlinux24-host-STLinux_deps-20140120-1.i386.rpm
+    - lava-test-case rpm_host_deps --shell rpm -ivh stlinux24-host-STLinux_deps-20140120-1.i386.rpm
+    - lava-test-case wget_install --shell wget http://ftp.stlinux.com/pub/stlinux/2.4/install
+    - lava-test-case sed_install --shell sed -i s=#\!/bin/sh=#\!/bin/bash= install
+    - lava-test-case chmod_install --shell chmod +x install
+    - lava-test-case install --shell ./install --debian || true
+    - lava-test-case stmyum_binutils --shell /opt/STM/STLinux-2.4/host/bin/stmyum -y install stlinux24-cross-sh4-binutils
+    - lava-test-case stmyum_stmc --shell /opt/STM/STLinux-2.4/host/bin/stmyum -y install stlinux24-host-stmc
+    - lava-test-case stmyum_gdb --shell /opt/STM/STLinux-2.4/host/bin/stmyum -y install stlinux24-cross-sh4-gdb
+    - lava-test-case stmyum_st40load --shell /opt/STM/STLinux-2.4/host/bin/stmyum -y install stlinux24-cross-st40load_gdb
+    - lava-test-case stmyum_update --shell /opt/STM/STLinux-2.4/host/bin/stmyum -y update
