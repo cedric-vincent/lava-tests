@@ -29,5 +29,5 @@ run:
     - lava-test-case stmyum_binutils --shell /opt/STM/STLinux-2.4/host/bin/stmyum -y install stlinux24-cross-sh4-binutils
     - lava-test-case stmyum_stmc --shell /opt/STM/STLinux-2.4/host/bin/stmyum -y install stlinux24-host-stmc
     - lava-test-case stmyum_gdb --shell /opt/STM/STLinux-2.4/host/bin/stmyum -y install stlinux24-cross-sh4-gdb
-    - lava-test-case stmyum_st40load --shell /opt/STM/STLinux-2.4/host/bin/stmyum -y install stlinux24-cross-st40load_gdb
+    - lava-test-case stmyum_st40load --shell /opt/STM/STLinux-2.4/host/bin/stmyum -y install stlinux24-cross-sh4-st40load_gdb
     - lava-test-case stmyum_update --shell /opt/STM/STLinux-2.4/host/bin/stmyum -y update
