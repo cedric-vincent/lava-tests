@@ -14,12 +14,13 @@ install:
   deps:
     - build-essential
     - libtalloc-dev
+    - chroot
     - gettext
+    - git
     - libcap2-bin
     - realpath
     - strace
     - valgrind
-    - git
 
 run:
   steps:
