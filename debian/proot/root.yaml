@@ -14,7 +14,7 @@ install:
   deps:
     - build-essential
     - libtalloc-dev
-    - chroot
+    - coreutils
     - gettext
     - git
     - libcap2-bin
